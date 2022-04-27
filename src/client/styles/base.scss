@@ -1,0 +1,28 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-image: url('../media/travel-bg.jpeg');
+}
+
+#travel-details-backboard {
+    display: flex;
+    flex-direction: column;
+    background-color:teal;
+    color: white;;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    width: 50%;
+    margin: 20%;
+    border-radius: 25px;
+}
+#travel-details-backboard label {
+    margin-left: 20px;
+}
+
+#get-travel-data {
+    justify-self: center;
+    margin-top: 30px;
+    height: 30px;
+    width: 100px;
+}
