@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
-import express, { application, response, response, response } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
@@ -40,26 +40,26 @@ app.get('/weather', (req, res) => {
 })
 
 app.get('/geo', (req, res) => {
-    const placename = req.query.placename;
+    const city = req.query.city;
 
-    if(placename === null) {
+    if(city === null) {
         res.send("Invalid request. Arguments missing.");
     }
 
-    const response = fetch(`http://api.geonames.org/postalCodeSearchJSON?placename=${placename}&country=us&username=${process.env.GEONAMES_USERNAME}`)
+    const response = fetch(`http://api.geonames.org/postalCodeSearchJSON?placename_startsWith=${city}&country=us&username=${process.env.GEONAMES_USERNAME}`)
         .then((response) => response.json())
         .then((data) => {
             let locations = data.postalCodes.map(x => {return {
                 city: x.placeName, 
                 state: x.adminName1,
-                lat: x.lat,
-                lon: x.lon
+                latitude: x.lat,
+                longitude: x.lng
             }});
-            res.send(locations)
+            res.send(locations[0]);
         })
         .catch((err) => {
             console.error(err);
-            console.log(`Failed to aquire data for places starting with ${placename}`);
+            console.log(`Failed to aquire data for places starting with ${city}`);
         })
 })
 

@@ -2,9 +2,6 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../styles/base.css">
-        <link rel="stylesheet" href="../styles/header.css">
-        <link rel="stylesheet" href="../styles/footer.css">
     </head>
     <body>
         <header>
@@ -27,7 +24,7 @@
                        <label for="desired-date">Date:</label>
                        <input type="date" id="desired-date" name="desired-date" placeholder="Date">
                     </form>
-                    <button id="get-travel-data">Book Trip</button>
+                    <button id="get-travel-data" onclick="return Client.getTripDetails()"><strong>Book Trip</strong></button>
                </div>
                
            </section>
