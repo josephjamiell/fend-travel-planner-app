@@ -4,19 +4,53 @@ html, body {
     background-image: url('../media/travel-bg.jpeg');
 }
 
-#travel-details-backboard {
+input {
+    width: 200px;
+    font-size: 15px;
+    margin: 10px;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 70vw 30vw;
+    grid-template-rows: 50vh 50vh;
+    grid-template-areas: 
+    "td td td td td td rt rt"
+    "                  rt rt"
+    "                  rt rt";
+}
+
+#trip-form-backboard {
+
+    grid-area: td;
     display: flex;
     flex-direction: column;
     background-color:teal;
-    color: white;;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    width: 80%;
+    margin: 20%;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    opacity: 0.90;
+}
+
+#recent-trips-backboard {
+    grid-area: tr;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
     justify-content: center;
     align-items: center;
     min-height: 200px;
-    width: 50%;
+    width: 60%;
     margin: 20%;
-    border-radius: 25px;
-    opacity: 0.75;
+    margin-top: 70px;
+    opacity: 0.90;
 }
+
 #travel-details-backboard label {
     margin-left: 20px;
 }
@@ -24,6 +58,24 @@ html, body {
 #get-travel-data {
     justify-self: center;
     margin-top: 30px;
-    height: 30px;
-    width: 100px;
+    margin-bottom: 20px;
+    height: 50px;
+    width: 175px;
+}
+
+#trip-form {
+    height: 50px;
+    width: 95%;
+    padding: 5px;
+    background-color: blanchedalmond;
+    color: black;
+    font-weight: bold;
+}
+
+.rounded {
+    border-radius: 25px;
+}
+
+.hide {
+    display: none;
 }

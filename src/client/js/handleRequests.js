@@ -2,7 +2,7 @@ const getTripDetails = async () => {
     const originCity = document.getElementById("origin").value;
     const destCity = document.getElementById("desired-dest").value;
 
-    if(destCity === null || destCity === ' ') {
+    if(destCity.length <= 0) {
         alert("Please enter a valid city");
         return;
     }

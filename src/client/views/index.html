@@ -13,10 +13,10 @@
             </nav>
         </header>
         <main id="container">
-           <section>
-               <div id="travel-details-backboard">
-                   <h3>Trip Details</h3>
-                   <form>
+           <section id="trip-booking-section">
+               <div id="trip-form-backboard" class="rounded">
+                   <h2 id="trip-form-title">Trip Details</h2>
+                   <form id="trip-form" class="rounded">
                        <label for="origin">Origin:</label>
                        <input type="text" id="origin" name="origin" placeholder="Origin">
                        <label for="desired-dest">Destination:</label>
@@ -24,11 +24,14 @@
                        <label for="desired-date">Date:</label>
                        <input type="date" id="desired-date" name="desired-date" placeholder="Date">
                     </form>
-                    <button id="get-travel-data" onclick="return Client.getTripDetails()"><strong>Book Trip</strong></button>
+                    <button id="get-travel-data" class="rounded" onclick="return Client.getTripDetails()"> <strong>Check Trip</strong></button>
                </div>
-               
            </section>
-           <section>
+           <section id="recent-trips-section">
+               <div id="recent-trips-backboard" class="rounded">
+                <h3>Recent Trips</h3>
+                <p>- No recent trips -</p>
+               </div>
            </section>
         </main>
         <footer>
