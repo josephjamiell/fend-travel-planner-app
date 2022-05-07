@@ -1,3 +1,5 @@
+let tripsData = [];
+
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import express from 'express';
@@ -80,6 +82,14 @@ app.get('/images', (req, res) => {
             console.err(err);
             console.log("Failed to retrieve photos");
         })
+})
+
+app.get('/trips', (req, res) => {
+    if(tripsData.length > 0) {
+        res.status(200).send(tripsData);
+    } else {
+        res.status(200).send({ message: "No trips" });
+    }
 })
 
 app.listen(port, () => {

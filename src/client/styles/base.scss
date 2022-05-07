@@ -7,47 +7,53 @@ html, body {
 input {
     width: 200px;
     font-size: 15px;
+    text-align: center;
     margin: 10px;
 }
 
-#container {
+.container {
     display: grid;
-    grid-template-columns: 70vw 30vw;
-    grid-template-rows: 50vh 50vh;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 25vh);
     grid-template-areas: 
-    "td td td td td td rt rt"
-    "                  rt rt"
-    "                  rt rt";
+    ". td td td . rt"
+    ". . . . . rt "
+    ". . . . . ."
+    ". . . . . .";
 }
 
-#trip-form-backboard {
-
+#trip-booking-section {
     grid-area: td;
+    margin: 10px;
+}
+
+#recent-trips-section {
+    grid-area: rt;
+    margin: 10px;
+}
+
+.trip-form-backboard {
     display: flex;
     flex-direction: column;
     background-color:teal;
     color: white;
     justify-content: center;
     align-items: center;
+    height: 100%;
     min-height: 300px;
-    width: 80%;
-    margin: 20%;
-    margin-top: 70px;
-    margin-bottom: 30px;
+    width: 100%;
     opacity: 0.90;
 }
 
-#recent-trips-backboard {
-    grid-area: rt;
+.recent-trips-backboard {
     display: flex;
     flex-direction: column;
     background-color: white;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
+    height: 100%;
     min-height: 200px;
-    width: 60%;
-    margin: 20%;
-    margin-top: 70px;
+    width: 100%;
     opacity: 0.90;
 }
 
@@ -64,6 +70,10 @@ input {
 }
 
 #trip-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     height: 50px;
     width: 95%;
     padding: 5px;
