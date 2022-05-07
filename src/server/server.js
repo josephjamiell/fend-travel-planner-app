@@ -8,7 +8,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const app = express();
-const port = 8080;
+const port = 8081;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 console.log(path.join(__dirname, '../client'));
@@ -32,7 +32,7 @@ app.get('/weather', (req, res) => {
 
     const response = fetch(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${process.env.WEATHERBIT_API_KEY}`)
         .then((response) => response.json())
-        .then((data) => {res.send(data)})
+        .then((data) => {res.send(data.data[0])})
         .catch((err) => {
             console.error(err);
             console.log(`Failed to aquire weather data for lat: ${lat} long: ${lon}`);
@@ -41,21 +41,21 @@ app.get('/weather', (req, res) => {
 
 app.get('/geo', (req, res) => {
     const city = req.query.city;
+    const country = req.query.country;
 
-    if(city === null) {
+    if(city === null || country === null) {
         res.send("Invalid request. Arguments missing.");
     }
 
-    const response = fetch(`http://api.geonames.org/postalCodeSearchJSON?placename_startsWith=${city}&country=us&username=${process.env.GEONAMES_USERNAME}`)
+    const response = fetch(`http://api.geonames.org/searchJSON?name=${city}&username=${process.env.GEONAMES_USERNAME}`)
         .then((response) => response.json())
         .then((data) => {
-            let locations = data.postalCodes.map(x => {return {
-                city: x.placeName, 
-                state: x.adminName1,
-                latitude: x.lat,
-                longitude: x.lng
-            }});
-            res.send(locations[0]);
+            for(let dest of data.geonames){
+                if(dest.name.toLowerCase() === city.toLowerCase() && dest.countryName.toLowerCase() === country.toLowerCase()) {
+                    res.status(200).send(dest);
+                    break;
+                }
+            }
         })
         .catch((err) => {
             console.error(err);
@@ -67,14 +67,14 @@ app.get('/images', (req, res) => {
 
     const q = req.query.q;
 
-    if(placename === null) {
+    if(q === null) {
         res.send("Invalid request. Arguments missing.");
     }
 
-    const response = fetch(`https://pixabay.com/api/?q=leopard&key=${process.env.PIXABAY_API_KEY}`)
+    const response = fetch(`https://pixabay.com/api/?q=${q}&key=${process.env.PIXABAY_API_KEY}`)
         .then((response) => response.json())
         .then((data) => {
-            res.send(data);
+            res.send(data.hits[0]);
         })
         .catch((err) => {
             console.err(err);
