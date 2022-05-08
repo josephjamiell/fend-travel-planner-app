@@ -25,10 +25,36 @@
                     <button id="get-travel-data" class="rounded" onclick="Client.getTripDetails()"> <strong>Check Trip</strong></button>
                </div>
            </section>
-           <section id="recent-trips-section">
-               <div class="recent-trips-backboard rounded">
-                <h3>Recent Trips</h3>
-                <p>- No recent trips -</p>
+           <section id="upcoming-trips-section">
+               <div class="upcoming-trips-backboard rounded">
+                   <h3>Upcoming Trips</h3>
+                   <p>- No upcoming trips -</p>
+               </div>
+           </section>
+           <section id="past-trips-section">
+               <div class="past-trips-backboard rounded">
+                   <h3>Past Trips</h3>
+                   <p>- No past trips -</p>
+               </div>
+          </section>
+           <section id="current-trips-section" class="rounded hide">
+               <div class="current-trips-backboard">
+                   <div id="trip-header-container">
+                       <p id="trip-header"></p>
+                   </div>
+                   <div id="trip-image-container">
+                       <img id="trip-image">
+                   </div>
+                   <div id="trip-desc-container">
+                       <p id="trip-desc"></p>
+                   </div>
+                   <div id="trip-highlow-container">
+                       <p id="trip-highlow"></p>
+                   </div>
+                   <div id="trip-booking-container">
+                    <button id="trip-cancel"><strong>Cancel Trip</strong</button>
+                    <button id="trip-book"><strong>Book Trip</strong</button>   
+                   </div>
                </div>
            </section>
         </main>

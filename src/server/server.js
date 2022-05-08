@@ -27,14 +27,22 @@ app.get('/', (req, res) => {
 app.get('/weather', (req, res) => {
     const lat = req.query.lat;
     const lon = req.query.lon;
+    const date = req.query.date;
 
-    if(lat === null || lon === null) {
+    if(lat === null || lon === null || date === null) {
         res.send("Invalid request. Arguments missing.");
     }
 
-    const response = fetch(`https://api.weatherbit.io/v2.0/current?lat=${lat}&lon=${lon}&key=${process.env.WEATHERBIT_API_KEY}`)
+    const response = fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${process.env.WEATHERBIT_API_KEY}`)
         .then((response) => response.json())
-        .then((data) => {res.send(data.data[0])})
+        .then((data) => {
+            for(let forecast of data.data) {
+                if(forecast.valid_date === date) {
+                    res.send(forecast);
+                    break;
+                }
+            }
+        })
         .catch((err) => {
             console.error(err);
             console.log(`Failed to aquire weather data for lat: ${lat} long: ${lon}`);

@@ -1,23 +1,29 @@
 const getTripDetails = async () => {
-    const dest = document.getElementById("desired-dest").value;
+    const dest = document.getElementById("desired-dest");
+    const date = document.getElementById("desired-date");
 
     if(dest.length <= 0) {
         alert("Please enter a valid city");
         return;
     }
 
-    let city = dest.split(",")[0].trim();
-    let country = dest.split(",")[1].trim();
+    if(date === null || date === undefined) {
+        alert("Please enter a valid date for your trip");
+        return;
+    }
+
+    let city = dest.value.split(",")[0].trim();
+    let country = dest.value.split(",")[1].trim();
+    let tripDate = date.value;
 
     try {
         const weather = await fetchCoordinates(city, country).then(async (coordinates) => {
-            return await fetchWeather(coordinates.lat, coordinates.lng)
+            return await fetchWeather(coordinates.lat, coordinates.lng, tripDate)
         })
 
-        //const imageData = await fetchImage(weather.weather.description);
         const imageData = await fetchImage(city);
 
-        Client.populateTripDetails(weather, imageData);
+        Client.populateTripDetails({city, country}, weather, imageData);
         
     } catch(err) {
         console.error(err);
@@ -37,8 +43,8 @@ const fetchCoordinates = async (city, country) => {
     })
 }
 
-const fetchWeather = async (lat, lon) => {
-    return await fetch(`http://localhost:8081/weather?lat=${lat}&lon=${lon}`)
+const fetchWeather = async (lat, lon, tdate) => {
+    return await fetch(`http://localhost:8081/weather?lat=${lat}&lon=${lon}&date=2022-05-20`)
     .then((response) => response.json())
     .then((data) => {
         return data;
