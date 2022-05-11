@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
     </head>
-    <body>
+    <body onload="Client.populateDestinations()">
         <header>
             <h1>Travel Planner App</h1>
             <nav>
@@ -16,9 +16,11 @@
            <section id="trip-booking-section">
                <div class="trip-form-backboard rounded">
                    <h2 id="trip-form-title">Trip Details</h2>
-                   <form id="trip-form" class="rounded">
+                   <form id="trip-form" class="rounded" autocomplete="off">
                        <label for="desired-dest">Destination:</label>
-                       <input type="text" id="desired-dest" name="desired-dest" placeholder="Tokyo, Japan">
+                       <input id="desired-dest" name="desired-dest" list="destinations">
+                       <datalist id="destinations">
+                       </datalist>
                        <label for="desired-date">Date:</label>
                        <input type="date" id="desired-date" name="desired-date" placeholder="Date">
                     </form>
@@ -26,10 +28,7 @@
                </div>
            </section>
            <section id="upcoming-trips-section">
-               <div class="upcoming-trips-backboard rounded">
-                   <h3>Upcoming Trips</h3>
-                   <p>- No upcoming trips -</p>
-               </div>
+               <div class="upcoming-trips-backboard rounded"></div>
            </section>
            <section id="past-trips-section">
                <div class="past-trips-backboard rounded">

@@ -17,9 +17,11 @@ const getTripDetails = async () => {
     let tripDate = date.value;
 
     try {
-        const weather = await fetchCoordinates(city, country).then(async (coordinates) => {
+        const weather = await fetchCoordinates(city, country)
+        .then((weather) => weather.json())
+        .then(async (coordinates) => {
             return await fetchWeather(coordinates.lat, coordinates.lng, tripDate)
-        })
+        });
 
         const imageData = await fetchImage(city);
 
@@ -33,7 +35,6 @@ const getTripDetails = async () => {
 
 const fetchCoordinates = async (city, country) => {
     return await fetch(`http://localhost:8081/geo?city=${city}&country=${country}`)
-    .then((response) => response.json())
     .then((data) => {
         return data;
     })

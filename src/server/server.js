@@ -1,5 +1,13 @@
 let tripsData = [];
 
+const destinations = [
+    {city: "Barcelona", country: "ES"},
+    {city: "Miami", country: "US"},
+    {city: "New York City", country: "US"},
+    {city: "London", country: "GB"},
+    {city: "St John's", country: "AG"}
+];
+
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import express from 'express';
@@ -57,15 +65,10 @@ app.get('/geo', (req, res) => {
         res.send("Invalid request. Arguments missing.");
     }
 
-    const response = fetch(`http://api.geonames.org/searchJSON?name=${city}&username=${process.env.GEONAMES_USERNAME}`)
+    const response = fetch(`http://api.geonames.org/searchJSON?name_equals=${city}&country=${country}&username=${process.env.GEONAMES_USERNAME}`)
         .then((response) => response.json())
         .then((data) => {
-            for(let dest of data.geonames){
-                if(dest.name.toLowerCase() === city.toLowerCase() && dest.countryName.toLowerCase() === country.toLowerCase()) {
-                    res.status(200).send(dest);
-                    break;
-                }
-            }
+            res.status(200).send(data.geonames[0]);
         })
         .catch((err) => {
             console.error(err);
@@ -92,11 +95,26 @@ app.get('/images', (req, res) => {
         })
 })
 
+app.get('/destinations', (req, res) => {
+    res.status(200).send(destinations);
+})
+
 app.get('/trips', (req, res) => {
     if(tripsData.length > 0) {
         res.status(200).send(tripsData);
     } else {
         res.status(200).send({ message: "No trips" });
+    }
+})
+
+app.post('/trips', async (req, res) => {
+    try {
+        tripsData.push(req.body);
+        res.status(201).send("Successfully stored trip data");
+    }
+    catch(err) {
+        console.error(err);
+        res.status(500).send("Failed to store trip data");
     }
 })
 

@@ -1,9 +1,20 @@
 import { getTripDetails } from './js/handleRequests.js';
-import { populateTripDetails } from './js/updateUI.js';
-
+import { populateTripDetails, bookCurrentTrip, populateDestinations } from './js/updateUI.js';
 import './styles/base.scss';
 import './styles/header.scss';
 import './styles/footer.scss';
 
-export { getTripDetails, populateTripDetails }
+export { getTripDetails, populateTripDetails, bookCurrentTrip, populateDestinations}
 
+//initialize events
+
+const booker = document.getElementById("trip-book");
+booker.addEventListener("click", () => {
+    const section = document.getElementById("current-trips-section");
+    const title = document.getElementById('trip-header');
+    const desc = document.getElementById('trip-desc');
+    const temp = document.getElementById('trip-highlow');
+
+    Client.bookCurrentTrip("2022-05-09", title.textContent, desc.textContent, temp.textContent);
+    section.classList.add("hide");
+})
