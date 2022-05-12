@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
     </head>
-    <body onload="Client.populateDestinations()">
+    <body onload="Client.populateDestinations(), Client.initializeTravelPlanner()">
         <header>
             <h1>Travel Planner App</h1>
             <nav>
@@ -21,8 +21,10 @@
                        <input id="desired-dest" name="desired-dest" list="destinations">
                        <datalist id="destinations">
                        </datalist>
-                       <label for="desired-date">Date:</label>
-                       <input type="date" id="desired-date" name="desired-date" placeholder="Date">
+                       <label for="desired-startdate">Start:</label>
+                       <input type="date" id="desired-startdate" name="desired-startdate" placeholder="Start Date">
+                       <label for="desired-enddate">End:</label>
+                       <input type="date" id="desired-enddate" name="desired-enddate" placeholder="End Date">
                     </form>
                     <button id="get-travel-data" class="rounded" onclick="Client.getTripDetails()"> <strong>Check Trip</strong></button>
                </div>
@@ -41,7 +43,7 @@
                    <div id="trip-header-container">
                        <p id="trip-header"></p>
                    </div>
-                   <div id="trip-image-container">
+                   <div id="trip-image-container" class="rounded">
                        <img id="trip-image">
                    </div>
                    <div id="trip-desc-container">

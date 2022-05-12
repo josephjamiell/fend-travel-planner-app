@@ -1,26 +1,26 @@
 const getTripDetails = async () => {
     const dest = document.getElementById("desired-dest");
-    const date = document.getElementById("desired-date");
+    const startDate = document.getElementById("desired-startdate");
 
     if(dest.length <= 0) {
         alert("Please enter a valid city");
         return;
     }
 
-    if(date === null || date === undefined) {
+    if(startDate === null || startDate === undefined) {
         alert("Please enter a valid date for your trip");
         return;
     }
 
     let city = dest.value.split(",")[0].trim();
     let country = dest.value.split(",")[1].trim();
-    let tripDate = date.value;
+    let tripStartDate = startDate.value;
 
     try {
         const weather = await fetchCoordinates(city, country)
         .then((weather) => weather.json())
         .then(async (coordinates) => {
-            return await fetchWeather(coordinates.lat, coordinates.lng, tripDate)
+            return await fetchWeather(coordinates.lat, coordinates.lng, tripStartDate)
         });
 
         const imageData = await fetchImage(city);

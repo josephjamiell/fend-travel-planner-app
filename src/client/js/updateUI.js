@@ -63,7 +63,6 @@ const populateTripDetails = (dest, forecast, imageUrl) => {
     
     const cts = document.getElementById("current-trips-section");
     cts.classList.remove("hide");
-    console.log(forecast);
 }
 
 const bookCurrentTrip = (date, dest, weather, temp) => {
@@ -82,4 +81,27 @@ const bookCurrentTrip = (date, dest, weather, temp) => {
     populateUpcomingTrips();
 }
 
-export { populateTripDetails, bookCurrentTrip, populateDestinations }
+const initializeTravelPlanner = () => {
+    const MAX_MONTHS = 6;
+    const tripStartDate = document.getElementById("desired-startdate");
+    const tripEndDate = document.getElementById("desired-enddate");
+    const booker = document.getElementById("trip-book");
+    booker.addEventListener("click", () => {
+        const section = document.getElementById("current-trips-section");
+        const title = document.getElementById('trip-header');
+        const desc = document.getElementById('trip-desc');
+        const temp = document.getElementById('trip-highlow');
+
+        Client.bookCurrentTrip(tripStartDate.value, title.textContent, desc.textContent, temp.textContent);
+        section.classList.add("hide");
+    })
+
+    const d = new Date();
+    
+    tripStartDate.min = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+    tripStartDate.max = `${d.getFullYear()}-${((d.getMonth() + 1) + MAX_MONTHS).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+    tripEndDate.min = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+    tripEndDate.max = `${d.getFullYear()}-${((d.getMonth() + 1) + MAX_MONTHS).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+}
+
+export { populateTripDetails, bookCurrentTrip, populateDestinations, initializeTravelPlanner }

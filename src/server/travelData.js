@@ -4,7 +4,8 @@ const destinations = [
     {city: "New York City", country: "US"},
     {city: "London", country: "GB"},
     {city: "St John's", country: "AG"},
-    {city: "Havana", country: "CU"}
+    {city: "Havana", country: "CU"},
+    {city: "Kingston", country: "JM"}
 ];
 
 const aircraft = [
