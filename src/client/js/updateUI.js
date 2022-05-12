@@ -6,7 +6,7 @@ const populateDestinations = () => {
         const fragment = new DocumentFragment();
         for(let dest of data) {
             const opt = document.createElement("option");
-            opt.value = `${dest.city}, ${dest.country}`;
+            opt.value = `${dest.city}, ${dest.countryCode}`;
             fragment.appendChild(opt);
         }
         dests.appendChild(fragment);
