@@ -45,7 +45,7 @@ const fetchCoordinates = async (city, country) => {
 }
 
 const fetchWeather = async (lat, lon, tdate) => {
-    return await fetch(`http://localhost:8081/weather?lat=${lat}&lon=${lon}&date=2022-05-20`)
+    return await fetch(`http://localhost:8081/weather?lat=${lat}&lon=${lon}&date=${tdate}`)
     .then((response) => response.json())
     .then((data) => {
         return data;

@@ -1,13 +1,5 @@
 let tripsData = [];
 
-const destinations = [
-    {city: "Barcelona", country: "ES"},
-    {city: "Miami", country: "US"},
-    {city: "New York City", country: "US"},
-    {city: "London", country: "GB"},
-    {city: "St John's", country: "AG"}
-];
-
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import express from 'express';
@@ -16,6 +8,7 @@ import cors from 'cors';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { destinations, aircraft} from './travelData.js';
 
 const app = express();
 const port = 8081;
@@ -36,7 +29,7 @@ app.get('/weather', (req, res) => {
     const lat = req.query.lat;
     const lon = req.query.lon;
     const date = req.query.date;
-
+    
     if(lat === null || lon === null || date === null) {
         res.send("Invalid request. Arguments missing.");
     }
@@ -109,7 +102,8 @@ app.get('/trips', (req, res) => {
 
 app.post('/trips', async (req, res) => {
     try {
-        tripsData.push(req.body);
+        let trip = {flight: "KWJ001", information: req.body}
+        tripsData.push(trip);
         res.status(201).send("Successfully stored trip data");
     }
     catch(err) {

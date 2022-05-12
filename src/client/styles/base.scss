@@ -76,6 +76,7 @@ select {
     min-height: 200px;
     width: 100%;
     opacity: 0.90;
+    overflow-y: auto;
 }
 
 .past-trips-backboard {
@@ -88,6 +89,7 @@ select {
     min-height: 200px;
     width: 100%;
     opacity: 0.90;
+    overflow-y: auto;
 }
 
 .current-trips-backboard {
@@ -118,6 +120,7 @@ select {
 #trip-header {
     font-size: 24px;
     font-weight: bold;
+    margin: 2px;
 }
 
 #trip-image-container {
@@ -142,6 +145,7 @@ select {
 #trip-desc {
     font-size: 24px;
     font-weight: bold;
+    margin: 2px;
 }
 
 #trip-highlow-container {
@@ -154,6 +158,7 @@ select {
 #trip-highlow {
     font-size: 30px;
     font-weight: 600;
+    margin: 2px;
 }
 
 #trip-booking-container {

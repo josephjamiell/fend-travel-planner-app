@@ -26,7 +26,7 @@ const populateUpcomingTrips = () => {
     .then((response) => response.json())
     .then((data) => {
         const fragment = new DocumentFragment();
-        if(data.length <= 0) {
+        if(data.message === "No trips") {
             let para = document.createElement("p");
             para.innerHTML = "- No upcoming trips -";
             fragment.appendChild(para);
@@ -34,7 +34,11 @@ const populateUpcomingTrips = () => {
             let triplist = document.createElement("ul");
             for(let trip of data) {
                 let item = document.createElement("li");
-                item.textContent = trip.destination;
+                let div = document.createElement("div");
+                div.innerHTML = 
+                `<h4>✈️ ${trip.information.destination} ✈️</h4>
+                 <h5>Departs on ${trip.information.date}</h5>`;
+                item.appendChild(div);
                 triplist.appendChild(item);
             }
             fragment.appendChild(triplist);

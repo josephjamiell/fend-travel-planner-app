@@ -9,12 +9,13 @@ export { getTripDetails, populateTripDetails, bookCurrentTrip, populateDestinati
 //initialize events
 
 const booker = document.getElementById("trip-book");
+const tripDate = document.getElementById("desired-date");
 booker.addEventListener("click", () => {
     const section = document.getElementById("current-trips-section");
     const title = document.getElementById('trip-header');
     const desc = document.getElementById('trip-desc');
     const temp = document.getElementById('trip-highlow');
 
-    Client.bookCurrentTrip("2022-05-09", title.textContent, desc.textContent, temp.textContent);
+    Client.bookCurrentTrip(tripDate.value, title.textContent, desc.textContent, temp.textContent);
     section.classList.add("hide");
 })
