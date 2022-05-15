@@ -1234,4 +1234,12 @@ const aircraft = [
     { flight: "KWJ005", type: "Airbus A380" },
 ]
 
-export { destinations, aircraft }
+const hotels = [
+  { name: "Anthony's Beach Club", cost: 125.00 },
+  { name: "KWJ Day Spa & Resorts", cost: 950.00 },
+  { name: "Niko's Inn", cost: 75.00 },
+  { name: "The Lexington by Jamiell Resorts", cost: 2250.00 }
+]
+
+
+export { destinations, aircraft, hotels }

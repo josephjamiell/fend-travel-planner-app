@@ -6,11 +6,6 @@
     <body onload="Client.populateDestinations(), Client.initializeTravelPlanner()">
         <header>
             <h1>Travel Planner App</h1>
-            <nav>
-                <a href="#home">Home</a>
-                <a href="#trips">Trips</a>
-                <a href="#about">About</a>
-            </nav>
         </header>
         <main class="container">
            <section id="trip-booking-section">
@@ -32,25 +27,52 @@
            <section id="upcoming-trips-section">
                <div class="upcoming-trips-backboard rounded"></div>
            </section>
-           <section id="past-trips-section">
+           <!--<section id="past-trips-section">
                <div class="past-trips-backboard rounded">
                    <h3>Past Trips</h3>
                    <p>- No past trips -</p>
                </div>
-          </section>
-           <section id="current-trips-section" class="rounded hide">
-               <div class="current-trips-backboard">
-                   <div id="trip-header-container">
-                       <p id="trip-header"></p>
+          </section>-->
+           <section id="current-trips-section" class="rounded">
+               <div class="current-trips-backboard rounded">
+                <div id="trip-flight-container">
+                    <p id="trip-flight">Flight</p>
+                </div>
+                   <div id="trip-dest-container">
+                       <p id="trip-dest">Dest</p>
                    </div>
                    <div id="trip-image-container" class="rounded">
-                       <img id="trip-image">
+                       <img id="trip-image" class="rounded">
+                   </div>
+                   <div id="trip-add-hotel-container">
+                       <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> Add Hotel
+                   </div>
+                   <div id="trip-add-rental-container">
+                       <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> Add Rental
+                   </div>
+                   <div id="trip-add-notes-container">
+                       <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> Add Notes
                    </div>
                    <div id="trip-desc-container">
-                       <p id="trip-desc"></p>
+                       <p id="trip-desc">Description</p>
                    </div>
                    <div id="trip-highlow-container">
-                       <p id="trip-highlow"></p>
+                       <p id="trip-highlow">High Low</p>
+                   </div>
+                   <div id="trip-feelslike-container">
+                       <p id="trip-feelslike">Feels Like</p>
+                   </div>
+                   <div id="trip-advice-container">
+                       <p id="trip-advice">Advice</p>
+                   </div>
+                   <div id="trip-multiday-forecast-container">
+                       <ul id="trip-multiday-forecast">
+                           <li>forecast</li>
+                           <li>forecast</li>
+                           <li>forecast</li>
+                           <li>forecast</li>
+                           <li>forecast</li>
+                       </ul>
                    </div>
                    <div id="trip-booking-container">
                     <button id="trip-cancel"><strong>Cancel Trip</strong</button>

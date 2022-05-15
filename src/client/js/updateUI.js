@@ -36,8 +36,7 @@ const populateUpcomingTrips = () => {
                 let item = document.createElement("li");
                 let div = document.createElement("div");
                 div.innerHTML = 
-                `<h4>✈️ ${trip.information.destination} ✈️</h4>
-                 <h5>Departs on ${trip.information.date}</h5>`;
+                `<h4>✈️ ${trip.information.destination} ✈️ Departs on ${trip.information.date} <a href="#view">View</a> <a href="#delete">Delete</a></h4>`;
                 item.appendChild(div);
                 triplist.appendChild(item);
             }
@@ -52,11 +51,11 @@ const populateUpcomingTrips = () => {
 }
 
 const populateTripDetails = (dest, forecast, imageUrl) => {
-    const title = document.getElementById("trip-header");
+    const titleDest = document.getElementById("trip-dest");
     const image = document.getElementById("trip-image");
     const description = document.getElementById("trip-desc");
     const highlow = document.getElementById("trip-highlow");
-    title.textContent = `${dest.city.toUpperCase()}, ${dest.country.toUpperCase()}`;
+    titleDest.textContent = `${dest.city.toUpperCase()}, ${dest.country.toUpperCase()}`;
     image.src = imageUrl;
     description.textContent = forecast.weather.description;
     highlow.textContent = `${forecast.high_temp}°C / ${forecast.low_temp}°C`;
@@ -88,11 +87,11 @@ const initializeTravelPlanner = () => {
     const booker = document.getElementById("trip-book");
     booker.addEventListener("click", () => {
         const section = document.getElementById("current-trips-section");
-        const title = document.getElementById('trip-header');
+        const titleDest = document.getElementById('trip-dest');
         const desc = document.getElementById('trip-desc');
         const temp = document.getElementById('trip-highlow');
 
-        Client.bookCurrentTrip(tripStartDate.value, title.textContent, desc.textContent, temp.textContent);
+        Client.bookCurrentTrip(tripStartDate.value, titleDest.textContent, desc.textContent, temp.textContent);
         section.classList.add("hide");
     })
 

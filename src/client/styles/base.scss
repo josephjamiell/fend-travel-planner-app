@@ -23,14 +23,14 @@ select {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 20vh);
     grid-template-areas: 
-    ". td td td . ut"
-    ".  .  .  . . ut"
-    ". ct ct ct . pt"
-    ". .  .  .  . pt"
-    ".  . .  .  .  .";
+    "td td td . ct ct ct"
+    ".  .  .  . ct ct ct"
+    "ut ut ut . ct ct ct"
+    "ut ut ut . ct ct ct"
+    ".  .  .  . .  .  . ";
 }
 
 #trip-booking-section {
@@ -72,7 +72,7 @@ select {
     background-color: white;
     justify-content: start;
     align-items: center;
-    height: 100%;
+    height: 90%;
     min-height: 200px;
     width: 100%;
     opacity: 0.90;
@@ -85,7 +85,7 @@ select {
     background-color: white;
     justify-content: start;
     align-items: center;
-    height: 100%;
+    height: 90%;
     min-height: 200px;
     width: 100%;
     opacity: 0.90;
@@ -94,30 +94,48 @@ select {
 
 .current-trips-backboard {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 0.25fr 1.25fr 1.5fr 1fr;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr;
     grid-template-areas: 
-    "hr hr hr hr hr"
-    "im im de de de"
-    "im im hl hl hl"
-    "bk bk bk bk bk";
+    "ft ft ft dt dt dt dt"
+    "im im im . de de de"
+    "im im im . hl hl hl"
+    "im im im . fl fl fl"
+    "ah ah ah . av av av"
+    "ar ar ar . mf mf mf"
+    "an an an . mf mf mf"
+    "bk bk bk bk bk bk kb";
     background-color: white;
     justify-content: start;
     align-items: center;
     height: 100%;
-    min-height: 320px;
+    min-height: 450px;
     width: 100%;
+    padding: 3px;
     opacity: 0.9;
 }
 
-#trip-header-container {
-    grid-area: hr;
+#trip-flight-container {
+    grid-area: ft;
     width: 100%;
     height: 100%;
     padding: 2px;
 }
 
-#trip-header {
+#trip-flight {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 2px;
+}
+
+#trip-dest-container {
+    grid-area: dt;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+}
+
+#trip-dest {
     font-size: 24px;
     font-weight: bold;
     margin: 2px;
@@ -133,6 +151,18 @@ select {
 #trip-image {
     height: 100%;
     width: 100%;
+}
+
+#trip-add-hotel-container {
+    grid-area: ah;
+}
+
+#trip-add-rental-container {
+    grid-area: ar;
+}
+
+#trip-add-notes-container {
+    grid-area: an;
 }
 
 #trip-desc-container {
@@ -161,6 +191,27 @@ select {
     margin: 2px;
 }
 
+#trip-feelslike-container {
+    grid-area: fl;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+}
+
+#trip-advice-container {
+    grid-area: av;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+}
+
+#trip-multiday-forecast-container {
+    grid-area: mf;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+}
+
 #trip-booking-container {
     grid-area: bk;
     width: 100%;
@@ -172,12 +223,16 @@ select {
      height: 50%;
      width: 40%;
      margin: 5px;
+     background-color: green;
+     color: white;
 }
 
 #trip-cancel {
     height: 50%;
     width: 40%;
     margin: 5px;
+    background-color: red;
+    color: white;
 }
 
 #travel-details-backboard label {
@@ -211,4 +266,27 @@ select {
 
 .hide {
     display: none;
+}
+
+.w3-button {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.w3-circle {
+    border-radius:50%
+}
+
+.w3-teal,
+.w3-hover-teal:hover {
+    color:#fff!important;
+    background-color:#009688!important;
+}
+
+.w3-xlarge {
+    font-size:24px!important;
 }
