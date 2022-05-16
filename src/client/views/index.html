@@ -13,9 +13,8 @@
                    <h2 id="trip-form-title">Trip Details</h2>
                    <form id="trip-form" class="rounded" autocomplete="off">
                        <label for="desired-dest">Destination:</label>
-                       <input id="desired-dest" name="desired-dest" list="destinations">
-                       <datalist id="destinations">
-                       </datalist>
+                       <select id="desired-dest" name="desired-dest">
+                       </select>
                        <label for="desired-startdate">Start:</label>
                        <input type="date" id="desired-startdate" name="desired-startdate" placeholder="Start Date">
                        <label for="desired-enddate">End:</label>
@@ -27,12 +26,6 @@
            <section id="upcoming-trips-section">
                <div class="upcoming-trips-backboard rounded"></div>
            </section>
-           <!--<section id="past-trips-section">
-               <div class="past-trips-backboard rounded">
-                   <h3>Past Trips</h3>
-                   <p>- No past trips -</p>
-               </div>
-          </section>-->
            <section id="current-trips-section" class="rounded">
                <div class="current-trips-backboard rounded">
                 <div id="trip-flight-container">
@@ -43,15 +36,6 @@
                    </div>
                    <div id="trip-image-container" class="rounded">
                        <img id="trip-image" class="rounded">
-                   </div>
-                   <div id="trip-add-hotel-container">
-                       <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> Add Hotel
-                   </div>
-                   <div id="trip-add-rental-container">
-                       <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> Add Rental
-                   </div>
-                   <div id="trip-add-notes-container">
-                       <button class="w3-button w3-xlarge w3-circle w3-teal">+</button> Add Notes
                    </div>
                    <div id="trip-desc-container">
                        <p id="trip-desc">Description</p>

@@ -1,4 +1,25 @@
+import fs from "fs";
+import path from "path";
+
 const destinations = [
+  {
+    "city": "Kabul",
+    "countryCode": "AF",
+    "country": "Afghanistan"
+  },
+  {
+    "city": "Havana",
+    "countryCode": "CU",
+    "country": "Cuba"
+  },
+  {
+    "city": "Miami",
+    "countryCode": "US",
+    "country": "United States"
+  }
+];
+
+const fullDestinations = [
     {
       "city": "Kabul",
       "countryCode": "AF",
@@ -1224,7 +1245,7 @@ const destinations = [
       "countryCode": "ZW",
       "country": "Zimbabwe"
     }
-  ];
+];
 
 const aircraft = [
     { flight: "KWJ001", type: "Boeing 737-800" },
@@ -1234,12 +1255,25 @@ const aircraft = [
     { flight: "KWJ005", type: "Airbus A380" },
 ]
 
-const hotels = [
-  { name: "Anthony's Beach Club", cost: 125.00 },
-  { name: "KWJ Day Spa & Resorts", cost: 950.00 },
-  { name: "Niko's Inn", cost: 75.00 },
-  { name: "The Lexington by Jamiell Resorts", cost: 2250.00 }
-]
+const saveTrips = async (trips, path) => {
+  try {
+    fs.writeFileSync(path, JSON.stringify(trips), "utf-8");
+  } catch(err) {
+    console.error(err);
+    console.log("Failed to save trips to disk");
+  }
+}  
 
+const loadTrips = async (path) => {
+  fs.readFileSync(path, "utf8", (err, data) => {
+    if(err) {
+      console.error(err);
+      console.log("Failed to load trips from disk");
+      return;
+    }
+    console.log(data);
+    return data;
+  })
+}
 
-export { destinations, aircraft, hotels }
+export { destinations, aircraft, saveTrips, loadTrips }

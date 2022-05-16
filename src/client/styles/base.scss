@@ -7,6 +7,10 @@ html, body {
     background-image: url('../media/travel-bg.jpeg');
 }
 
+table, th, td {
+    border: 1px solid black;
+}
+
 input {
     width: 200px;
     font-size: 15px;
@@ -101,9 +105,8 @@ select {
     "im im im . de de de"
     "im im im . hl hl hl"
     "im im im . fl fl fl"
-    "ah ah ah . av av av"
-    "ar ar ar . mf mf mf"
-    "an an an . mf mf mf"
+    "mf mf mf . av av av"
+    "mf mf mf . av av av"
     "bk bk bk bk bk bk kb";
     background-color: white;
     justify-content: start;
@@ -266,6 +269,13 @@ select {
 
 .hide {
     display: none;
+}
+
+.status-pill {
+    min-width: 125px;
+    color: white;
+    border-radius: 5px;
+    padding: 2px;
 }
 
 .w3-button {

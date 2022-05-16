@@ -8,7 +8,7 @@ import cors from 'cors';
 import path from 'path';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { destinations, aircraft} from './travelData.js';
+import { destinations, aircraft, saveTrips, loadTrips} from './travelData.js';
 
 const app = express();
 const port = 8081;
@@ -89,21 +89,35 @@ app.get('/images', (req, res) => {
 })
 
 app.get('/destinations', (req, res) => {
-    res.status(200).send(destinations);
+    const sortedDestinations = destinations.sort( function( a, b ) {
+        a = a.city.toLowerCase();
+        b = b.city.toLowerCase();
+    
+        return a < b ? -1 : a > b ? 1 : 0;
+    });
+
+    res.status(200).send(sortedDestinations);
 })
 
-app.get('/trips', (req, res) => {
+app.get('/trips', async (req, res) => {
     if(tripsData.length > 0) {
         res.status(200).send(tripsData);
     } else {
+        let result = loadTrips(path.join(__dirname, "trips.bkup.json"))
+        .then((data) => {console.log(data)});
         res.status(200).send({ message: "No trips" });
     }
 })
 
 app.post('/trips', async (req, res) => {
     try {
-        let trip = {flight: "KWJ001", information: req.body}
+        let trip = {
+            id: `JJ${(tripsData.length + 1).toString().padStart(4, "0")}`, 
+            flight: `${aircraft[Math.floor(Math.random() * aircraft.length) + 1].flight}`,
+            information: req.body
+        }
         tripsData.push(trip);
+        saveTrips(tripsData, path.join(__dirname, "trips.bkup.json"));
         res.status(201).send("Successfully stored trip data");
     }
     catch(err) {
