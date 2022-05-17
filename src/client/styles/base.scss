@@ -315,3 +315,22 @@ select {
 .w3-xlarge {
     font-size:24px!important;
 }
+
+@media screen and (max-width: 600px) {
+    .container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(10, 10vh);
+        grid-template-areas: 
+        "td td td"
+        ".  .  . "
+        ".  .  . "
+        "ct ct ct"
+        "ct ct ct"
+        "ut ut ut"
+        "ut ut ut"
+        "ut ut ut"
+        ".  .  . "
+        ".  .  . ";
+    }
+}

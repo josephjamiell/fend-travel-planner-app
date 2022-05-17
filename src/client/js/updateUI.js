@@ -23,7 +23,7 @@ const populateDestinations = () => {
 const populateUpcomingTrips = () => {
     console.log("Starting to populate trips");
     const upcoming = document.querySelector(".upcoming-trips-backboard");
-    upcoming.innerHTML = "<h3>My Trips</h3>"
+    upcoming.innerHTML = '<h3 id="mytrips-header">My Trips</h3>'
     const response = fetch("http://localhost:8081/trips")
     .then((response) => response.json())
     .then((data) => {
@@ -37,6 +37,7 @@ const populateUpcomingTrips = () => {
             let tripListTable = document.createElement("table");
             let tableHead = document.createElement("thead");
             let tableHeadingRow = document.createElement("tr")
+            tableHeadingRow.setAttribute("id", "table-heading-row");
             let idHeading = document.createElement("th");
             idHeading.textContent = "ID";
             let destinationHeading = document.createElement("th");
