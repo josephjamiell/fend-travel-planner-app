@@ -3,13 +3,15 @@ html, body {
     height: 100%;
     width: 100%;
     margin: 0;
-    //background-color: royalblue;
     background-image: url('../media/travel-bg.jpeg');
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 table, th, td {
     border: 1px solid black;
+    padding: 4px;
 }
+
 
 input {
     width: 200px;
@@ -30,11 +32,18 @@ select {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(5, 20vh);
     grid-template-areas: 
-    "td td td . ct ct ct"
-    ".  .  .  . ct ct ct"
-    "ut ut ut . ct ct ct"
-    "ut ut ut . ct ct ct"
-    ".  .  .  . .  .  . ";
+    "td td td . ut ut ut"
+    ".  .  .  . ut ut ut"
+    "ct ct ct . ut ut ut"
+    "ct ct ct . ut ut ut"
+    ".  .  .  .  .  .  .";
+}
+
+#slogan {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-self: center;
+    justify-self: center;
+    margin-left: 8px;
 }
 
 #trip-booking-section {
@@ -99,23 +108,28 @@ select {
 .current-trips-backboard {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr 2fr 1fr;
     grid-template-areas: 
     "ft ft ft dt dt dt dt"
     "im im im . de de de"
     "im im im . hl hl hl"
-    "im im im . fl fl fl"
-    "mf mf mf . av av av"
-    "mf mf mf . av av av"
-    "bk bk bk bk bk bk kb";
+    "bk bk bk bk bk bk bk";
     background-color: white;
     justify-content: start;
     align-items: center;
     height: 100%;
-    min-height: 450px;
-    width: 100%;
+    min-height: 200px;
+    width: 90%;
     padding: 3px;
     opacity: 0.9;
+}
+
+.filler-image {
+    grid-area: ct;
+    width: 100%;
+    height: 100%;
+    background-image: url(../media/aircraft.gif);
+    background-repeat: no-repeat;
 }
 
 #trip-flight-container {
@@ -220,6 +234,7 @@ select {
     width: 100%;
     height: 100%;
     padding: 2px;
+    margin: 5px;
 }
 
 #trip-book {

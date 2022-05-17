@@ -21,11 +21,13 @@ const populateDestinations = () => {
 }
 
 const populateUpcomingTrips = () => {
+    console.log("Starting to populate trips");
     const upcoming = document.querySelector(".upcoming-trips-backboard");
     upcoming.innerHTML = "<h3>My Trips</h3>"
     const response = fetch("http://localhost:8081/trips")
     .then((response) => response.json())
     .then((data) => {
+        console.log("Received trips", data);
         const fragment = new DocumentFragment();
         if(data.message === "No trips") {
             let para = document.createElement("p");
@@ -101,6 +103,7 @@ const populateUpcomingTrips = () => {
             fragment.appendChild(tripListTable);
         }
         upcoming.appendChild(fragment);
+        console.log("Finished populating trips");
     })
     .catch((err) => {
         console.error(err);
@@ -157,8 +160,8 @@ const initializeTravelPlanner = () => {
     
     tripStartDate.min = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
     tripStartDate.max = `${d.getFullYear()}-${((d.getMonth() + 1) + MAX_MONTHS).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
-    tripEndDate.min = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
-    tripEndDate.max = `${d.getFullYear()}-${((d.getMonth() + 1) + MAX_MONTHS).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+    //tripEndDate.min = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
+    //tripEndDate.max = `${d.getFullYear()}-${((d.getMonth() + 1) + MAX_MONTHS).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
 }
 
 export { populateTripDetails, bookCurrentTrip, populateDestinations, initializeTravelPlanner }

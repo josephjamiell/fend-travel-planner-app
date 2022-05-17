@@ -11,7 +11,7 @@ const getTripDetails = async () => {
         alert("Please enter a valid date for your trip");
         return;
     }
-
+    
     let city = dest.value.split(",")[0].trim();
     let country = dest.value.split(",")[1].trim();
     let tripStartDate = startDate.value;
@@ -68,4 +68,21 @@ const fetchImage = async (name) => {
     })
 }
 
-export { getTripDetails }
+const checkServerOnline = async (name) => {
+    return await fetch(`http://localhost:8081/status`)
+    .then((data) => {
+        return data
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log(`Failed to get server response`)
+    })
+}
+
+export { 
+    getTripDetails, 
+    checkServerOnline,
+    fetchCoordinates,
+    fetchWeather,
+    fetchImage
+}

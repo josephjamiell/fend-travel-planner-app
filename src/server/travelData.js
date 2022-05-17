@@ -16,7 +16,24 @@ const destinations = [
     "city": "Miami",
     "countryCode": "US",
     "country": "United States"
+  },
+  {
+    "city": "Los Angeles",
+    "countryCode": "US",
+    "country": "United States"
+  },
+  {
+    "city": "Jersey City",
+    "countryCode": "US",
+    "country": "United States"
+  },
+  {
+    "city": "Chicago",
+    "countryCode": "US",
+    "country": "United States"
   }
+
+
 ];
 
 const fullDestinations = [
@@ -1265,15 +1282,8 @@ const saveTrips = async (trips, path) => {
 }  
 
 const loadTrips = async (path) => {
-  fs.readFileSync(path, "utf8", (err, data) => {
-    if(err) {
-      console.error(err);
-      console.log("Failed to load trips from disk");
-      return;
-    }
-    console.log(data);
-    return data;
-  })
+  let data = fs.readFileSync(path);
+  return data;
 }
 
 export { destinations, aircraft, saveTrips, loadTrips }

@@ -58,7 +58,7 @@ app.get('/geo', (req, res) => {
         res.send("Invalid request. Arguments missing.");
     }
 
-    const response = fetch(`http://api.geonames.org/searchJSON?name_equals=${city}&country=${country}&username=${process.env.GEONAMES_USERNAME}`)
+    const response = fetch(`http://api.geonames.org/searchJSON?placename=${city}&country=${country}&username=${process.env.GEONAMES_USERNAME}`)
         .then((response) => response.json())
         .then((data) => {
             res.status(200).send(data.geonames[0]);
@@ -88,6 +88,15 @@ app.get('/images', (req, res) => {
         })
 })
 
+app.get('/status', async (req, res) => {
+   try {
+    res.status(200).send({status: "online", code: 5555});
+   } catch (err) {
+       console.error(err);
+       console.log("Failed to get status from server");
+   }
+})
+
 app.get('/destinations', (req, res) => {
     const sortedDestinations = destinations.sort( function( a, b ) {
         a = a.city.toLowerCase();
@@ -103,9 +112,19 @@ app.get('/trips', async (req, res) => {
     if(tripsData.length > 0) {
         res.status(200).send(tripsData);
     } else {
-        let result = loadTrips(path.join(__dirname, "trips.bkup.json"))
-        .then((data) => {console.log(data)});
-        res.status(200).send({ message: "No trips" });
+        try {
+            let loadedTrips = await loadTrips(path.join(__dirname, "trips.bkup.json"));
+            let parsedTrips = JSON.parse(loadedTrips);
+            if(parsedTrips.length > 0) {
+                tripsData.push(...parsedTrips);
+                res.status(200).send(tripsData);
+            } else {
+                res.status(200).send({ message: "No trips" });
+            }
+        } catch(err) {
+            console.error(err);
+            console.log("Failed to added loaded trips to tripsData");
+        }
     }
 })
 
@@ -113,7 +132,7 @@ app.post('/trips', async (req, res) => {
     try {
         let trip = {
             id: `JJ${(tripsData.length + 1).toString().padStart(4, "0")}`, 
-            flight: `${aircraft[Math.floor(Math.random() * aircraft.length) + 1].flight}`,
+            flight: `${aircraft[Math.floor(Math.random() * aircraft.length)].flight}`,
             information: req.body
         }
         tripsData.push(trip);

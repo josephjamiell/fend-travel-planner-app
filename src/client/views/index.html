@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     </head>
     <body onload="Client.populateDestinations(), Client.initializeTravelPlanner()">
         <header>
-            <h1>Travel Planner App</h1>
+            <h1>Travel Planner App</h1><br>
+            <h4 id="slogan">Come see the world with us</h4>
         </header>
         <main class="container">
            <section id="trip-booking-section">
@@ -15,10 +17,8 @@
                        <label for="desired-dest">Destination:</label>
                        <select id="desired-dest" name="desired-dest">
                        </select>
-                       <label for="desired-startdate">Start:</label>
+                       <label for="desired-startdate">Departs:</label>
                        <input type="date" id="desired-startdate" name="desired-startdate" placeholder="Start Date">
-                       <label for="desired-enddate">End:</label>
-                       <input type="date" id="desired-enddate" name="desired-enddate" placeholder="End Date">
                     </form>
                     <button id="get-travel-data" class="rounded" onclick="Client.getTripDetails()"> <strong>Check Trip</strong></button>
                </div>
@@ -26,7 +26,7 @@
            <section id="upcoming-trips-section">
                <div class="upcoming-trips-backboard rounded"></div>
            </section>
-           <section id="current-trips-section" class="rounded">
+           <section id="current-trips-section" class="rounded hide">
                <div class="current-trips-backboard rounded">
                 <div id="trip-flight-container">
                     <p id="trip-flight">Flight</p>
@@ -42,21 +42,6 @@
                    </div>
                    <div id="trip-highlow-container">
                        <p id="trip-highlow">High Low</p>
-                   </div>
-                   <div id="trip-feelslike-container">
-                       <p id="trip-feelslike">Feels Like</p>
-                   </div>
-                   <div id="trip-advice-container">
-                       <p id="trip-advice">Advice</p>
-                   </div>
-                   <div id="trip-multiday-forecast-container">
-                       <ul id="trip-multiday-forecast">
-                           <li>forecast</li>
-                           <li>forecast</li>
-                           <li>forecast</li>
-                           <li>forecast</li>
-                           <li>forecast</li>
-                       </ul>
                    </div>
                    <div id="trip-booking-container">
                     <button id="trip-cancel"><strong>Cancel Trip</strong</button>
