@@ -53,5 +53,12 @@
         <footer>
             <h3>Powered by Javascript</h3>
         </footer>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
     </body>
 </html>

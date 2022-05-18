@@ -1,3 +1,4 @@
+// load stored destinations from server
 const populateDestinations = () => {
     const dests = document.getElementById("desired-dest");
     const response = fetch("http://localhost:8081/destinations")
@@ -20,22 +21,24 @@ const populateDestinations = () => {
     populateUpcomingTrips();
 }
 
+// loading upcoming trips from the server
+// populate table with trips data
 const populateUpcomingTrips = () => {
-    console.log("Starting to populate trips");
     const upcoming = document.querySelector(".upcoming-trips-backboard");
     upcoming.innerHTML = '<h3 id="mytrips-header">My Trips</h3>'
     const response = fetch("http://localhost:8081/trips")
     .then((response) => response.json())
     .then((data) => {
-        console.log("Received trips", data);
         const fragment = new DocumentFragment();
         if(data.message === "No trips") {
             let para = document.createElement("p");
             para.innerHTML = "- No saved trips -";
             fragment.appendChild(para);
         } else {
+            // create trips table
             let tripListTable = document.createElement("table");
             let tableHead = document.createElement("thead");
+            // create trips table headings row
             let tableHeadingRow = document.createElement("tr")
             tableHeadingRow.setAttribute("id", "table-heading-row");
             let idHeading = document.createElement("th");
@@ -53,6 +56,7 @@ const populateUpcomingTrips = () => {
             let actionsHeading = document.createElement("th");
             actionsHeading.textContent = "Trip Actions";
             let tableBody = document.createElement("tbody");
+            // Add stored trips to trips table
             for(let trip of data) {
                 let row = document.createElement("tr");
                 let idData = document.createElement("td");
@@ -69,19 +73,29 @@ const populateUpcomingTrips = () => {
 
                 const currentDate = new Date();
                 const tripDate = new Date(trip.information.date);
-                if(tripDate < currentDate) {
+
+                // add 'canceled' status, if trip is canceled
+                if(trip.isCanceled) {
+                    statusData.innerHTML = `<p><span style="background-color:orange;" class="status-pill">canceled</span><p>`;
+                }
+                // add 'expired' status, if trip is expired
+                else if(tripDate < currentDate) {
                     statusData.innerHTML = `<p><span style="background-color:red;" class="status-pill">expired</span><p>`;
-                } else if (tripDate == currentDate) {
+                } 
+                // add 'on time' status, if trip is on time
+                else if (tripDate == currentDate) {
                     statusData.innerHTML = `<p><span style="background-color:green;" class="status-pill">on time</span><p>`;
-                } else if (tripDate > currentDate) {
+                } 
+                // add 'upcoming' status, if trip is upcoming
+                else if (tripDate > currentDate) {
                     statusData.innerHTML = `<p><span style="background-color:green;" class="status-pill">upcoming</span><p>`;
-                } else {
-                    statusData.innerHTML = `<p><span style="background-color:orange;" class="status-pill">n/a</span><p>`;
                 }
 
-                
+                // create trip data and add to current row
                 let tripActionsData = document.createElement("td");
-                tripActionsData.innerHTML = `<td><a href="#cancel-trip">Cancel</a></td>`;
+                if(!trip.isCanceled && (tripDate > currentDate)) {
+                    tripActionsData.innerHTML = `<td><a href="#cancel-trip" onclick="Client.cancelTrip('${trip.id}')">Cancel</a></td>`;
+                }
                 row.appendChild(idData);
                 row.appendChild(dateData);
                 row.appendChild(flightData);
@@ -103,8 +117,8 @@ const populateUpcomingTrips = () => {
             tripListTable.appendChild(tableHead);
             fragment.appendChild(tripListTable);
         }
+        // display trips table
         upcoming.appendChild(fragment);
-        console.log("Finished populating trips");
     })
     .catch((err) => {
         console.error(err);
@@ -112,6 +126,7 @@ const populateUpcomingTrips = () => {
     })
 }
 
+// add trip details to display in container
 const populateTripDetails = (dest, forecast, imageUrl) => {
     const titleDest = document.getElementById("trip-dest");
     const image = document.getElementById("trip-image");
@@ -126,6 +141,7 @@ const populateTripDetails = (dest, forecast, imageUrl) => {
     cts.classList.remove("hide");
 }
 
+// add trip to storage on sever
 const bookCurrentTrip = (date, dest, weather, temp) => {
     const response = fetch("http://localhost:8081/trips", {
         method: "POST",
@@ -142,6 +158,22 @@ const bookCurrentTrip = (date, dest, weather, temp) => {
     populateUpcomingTrips();
 }
 
+// cancel trip stored on server using trip id
+const cancelTrip = async (id) => {
+    const response = await fetch("http://localhost:8081/trips", {
+        method: "PUT",
+        body: new URLSearchParams({id: id})
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log(`Failed to cancel trip ${id}`);
+    })
+
+    populateUpcomingTrips();
+}
+
+// initalize required event listeners
+// set calendar to start from current date
 const initializeTravelPlanner = () => {
     const MAX_MONTHS = 6;
     const tripStartDate = document.getElementById("desired-startdate");
@@ -165,4 +197,10 @@ const initializeTravelPlanner = () => {
     //tripEndDate.max = `${d.getFullYear()}-${((d.getMonth() + 1) + MAX_MONTHS).toString().padStart(2, "0")}-${d.getDate().toString().padStart(2, "0")}`;
 }
 
-export { populateTripDetails, bookCurrentTrip, populateDestinations, initializeTravelPlanner }
+export { 
+    populateTripDetails, 
+    bookCurrentTrip, 
+    populateDestinations, 
+    initializeTravelPlanner,
+    cancelTrip
+ }

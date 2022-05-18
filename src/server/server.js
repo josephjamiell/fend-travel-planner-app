@@ -133,7 +133,8 @@ app.post('/trips', async (req, res) => {
         let trip = {
             id: `JJ${(tripsData.length + 1).toString().padStart(4, "0")}`, 
             flight: `${aircraft[Math.floor(Math.random() * aircraft.length)].flight}`,
-            information: req.body
+            information: req.body,
+            isCanceled: null
         }
         tripsData.push(trip);
         saveTrips(tripsData, path.join(__dirname, "trips.bkup.json"));
@@ -145,7 +146,25 @@ app.post('/trips', async (req, res) => {
     }
 })
 
+app.put('/trips', async (req, res) => {
+    let id = req.body.id.toString();
+    try {
+        let tripToCancel = tripsData.find((trip) => {
+            return trip.id == id;
+        })
+        let pos = tripsData.indexOf(tripToCancel, 0);
+        tripsData[pos].isCanceled = true;
+        saveTrips(tripsData, path.join(__dirname, "trips.bkup.json"));
+        res.send(`Trip ${tripToCancel.id} to ${tripToCancel.information.destination} has been canceled.`);
+    } catch(err) {
+        console.error(err);
+        console.log(`Failed to cancel trip ${id} on the server`)
+    }
+})
+
 app.listen(port, () => {
     console.log(`Travel Planner App listening on http://localhost:${port}`);
     console.log("Press Ctrl + C to exit...");
 })
+
+export {app}

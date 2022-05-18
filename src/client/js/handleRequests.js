@@ -1,3 +1,4 @@
+
 const getTripDetails = async () => {
     const dest = document.getElementById("desired-dest");
     const startDate = document.getElementById("desired-startdate");

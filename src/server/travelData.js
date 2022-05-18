@@ -31,8 +31,17 @@ const destinations = [
     "city": "Chicago",
     "countryCode": "US",
     "country": "United States"
+  },
+  {
+    "city": "Prague",
+    "countryCode": "CZ",
+    "country": "Czech Republic"
+  },
+  {
+    "city": "Roseau",
+    "countryCode": "DM",
+    "country": "Dominica"
   }
-
 
 ];
 
